@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>AtelionCollabNav</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
+    <style>
+        /*this block should go in the styles.css file*/
+        .ui-panel-inner {
+            padding:0px; /*make the buttons flush edge to edge*/
+        }
+        .ui-controlgroup {
+            margin:0; /*make the buttons flush to the top*/
+        }
+        #header {
+            height:54px;
+        }
+        #bars-button {
+            margin:7px;
+        }
+    </style>
+    <script>
+        $(document).on('pagebeforeshow', '[data-role="page"]', function(){
+            $(function () {
+                var menuStatus;
+
+                $("a.showMenu").click(function () {
+                    if (menuStatus != true) {
+                        $("#menuFrame").show();
+                        $(".ui-page-active").animate({
+                            marginLeft: "165px",
+                        }, 300, function () {
+                            menuStatus = true;
+                        });
+                        return false;
+                    } else {
+                        $(".ui-page-active").animate({
+                            marginLeft: "0px",
+                        }, 300, function () {
+                            menuStatus = false;
+                            $("#menuFrame").hide();
+                        });
+                        return false;
+                    }
+                });
+
+/*
+                $('.pages').live("swipeleft", function () {
+                    if (menuStatus) {
+                        $(".ui-page-active").animate({
+                            marginLeft: "0px",
+                        }, 300, function () {
+                            menuStatus = false;
+                            $("#menuFrame").hide();
+                        });
+                    }
+                });
+
+                $('.pages').live("swiperight", function () {
+                    if (!menuStatus) {
+                        $("#menuFrame").show();
+                        $(".ui-page-active").animate({
+                            marginLeft: "165px",
+                        }, 300, function () {
+                            menuStatus = true;
+                        });
+                    }
+                });
+*/
+
+                $("#menu li a").click(function () {
+                    var p = $(this).parent();
+                    if ($(p).hasClass('active')) {
+                        $("#menu li").removeClass('active');
+                    } else {
+                        $("#menu li").removeClass('active');
+                        $(p).addClass('active');
+                    }
+                });
+
+            });
+        });
+
+    </script>
+</head>
+<body>
+
+<iframe src="menu.html" id="menuFrame" frameborder="0" style="height:100%;width:164px"></iframe>
+<div data-role="page" class="pages" id="home" data-theme="b">
+
+<!--
+    <div data-role="panel" id="navpanel" data-theme="a"
+         data-display="reveal" data-position="left">
+        <div data-role="controlgroup" data-corners="false">
+            <a href="index.html" data-role="button">Home</a>
+            <a href="messages.html" data-role="button">Messages</a>
+            <a href="#" data-role="button">Medications</a>
+            <a href="#" data-role="button">Goals</a>
+        </div>
+    </div>
+-->
+
+    <div id="header" data-role="header" data-theme="b">
+        <a id="bars-button" data-icon="bars" class="ui-btn-left showMenu" style="margin-top:10px;" href="#navpanel">Menu</a>
+    </div>
+    <div data-role="content">
+        <p>
+            <strong>Note: You can swipe right/left to show/close menu.</strong>
+        </p>
+
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book.
+        </p>
+
+        <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
+            Aldus PageMaker including versions of Lorem Ipsum.
+        </p>
+    </div>
+</div>
+</body>
+</html>
